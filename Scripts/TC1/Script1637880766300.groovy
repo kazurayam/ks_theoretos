@@ -9,15 +9,18 @@ import com.kms.katalon.core.webui.keyword.WebUiBuiltInKeywords as WebUI
 Path projectDir = Paths.get(RunConfiguration.getProjectDir())
 Path html = projectDir.resolve("page.html")
 URL htmlURL = html.toUri().toURL()
+int timeout = 10
 
 WebUI.openBrowser('')
 WebUI.navigateToUrl(htmlURL.toExternalForm())
 
-String expr = '''//div'''
+String key = '1020Q'
+int index = 3
+String expr = """//div[@id='detail-grid']//span[starts-with(text(),'${key}')]/parent::div/parent::div/following-sibling::div[${index}]"""
+
 TestObject tObj = createTestObjectWithXPath(expr)
 
-WebUI.verifyElementPresent(tObj, 10)
-
+WebUI.verifyElementPresent(tObj, timeout)
 WebUI.closeBrowser()
 
 /**
